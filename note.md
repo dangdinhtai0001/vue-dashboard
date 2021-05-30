@@ -1,0 +1,2 @@
+** Nuxtjs vuetify throwing lots of `Using / for division is deprecated and will be removed in Dart Sass 2.0.0.`**
+https://stackoverflow.com/questions/67631879/nuxtjs-vuetify-throwing-lots-of-using-for-division-is-deprecated-and-will-be
