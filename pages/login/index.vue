@@ -275,7 +275,7 @@ export default {
     },
 
     signUp() {
-      this.$toast("I'm a toast!");
+      this.$toast.success("I'm a toast!");
     },
 
     switchForm() {
