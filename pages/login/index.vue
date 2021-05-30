@@ -71,6 +71,10 @@
                     </h5>
                   </v-card-text>
 
+                  <div>
+                    <TravelAnimation />
+                  </div>
+
                   <div class="text-center mt-3 mb-3">
                     <v-btn rounded outlined dark @click="switchForm()">
                       SIGN UP
@@ -93,8 +97,15 @@
                     </h5>
                   </v-card-text>
 
+                                   <div>
+                    <TravelAnimation />
+
+                  </div>
+
                   <div class="text-center mt-3 mb-3">
-                    <v-btn rounded outlined @click="switchForm()"> SIGN IN </v-btn>
+                    <v-btn rounded outlined @click="switchForm()">
+                      SIGN IN
+                    </v-btn>
                   </div>
                 </v-col>
 
@@ -193,6 +204,10 @@ export default {
       password: { required },
       confirmPassword: { required, sameAsPassword: sameAs("password") },
     },
+  },
+
+  components: {
+    TravelAnimation: () => import("~/components/TravelAnimation.vue"),
   },
 
   data: () => ({
