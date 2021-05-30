@@ -30,18 +30,18 @@
                       Ensure your username/ password for sign in
                     </p>
                     <!-- ************************ SIGN IN FORM ************************ -->
-                    <v-form class="px-7" v-model="signValid">
+                    <v-form class="px-7" v-model="signInValid">
                       <v-text-field
                         label="Username"
                         prepend-inner-icon="mdi-account"
-                        v-model="loginForm.username"
-                        :error-messages="usernameErrors"
-                        @input="$v.loginForm.username.$touch()"
-                        @blur="$v.loginForm.username.$touch()"
+                        v-model="signInForm.username"
+                        :error-messages="signInUsernameErrors"
+                        @input="$v.signInForm.username.$touch()"
+                        @blur="$v.signInForm.username.$touch()"
                       ></v-text-field>
 
                       <v-text-field
-                        v-model="loginForm.password"
+                        v-model="signInForm.password"
                         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                         :type="showPassword ? 'text' : 'password'"
                         name="input-10-1"
@@ -49,9 +49,9 @@
                         counter
                         prepend-inner-icon="mdi-key"
                         @click:append="showPassword = !showPassword"
-                        :error-messages="passwordErrors"
-                        @input="$v.loginForm.password.$touch()"
-                        @blur="$v.loginForm.password.$touch()"
+                        :error-messages="signInPasswordErrors"
+                        @input="$v.signInForm.password.$touch()"
+                        @blur="$v.signInForm.password.$touch()"
                       ></v-text-field>
                     </v-form>
                     <!-- ************************ SIGN IN FORM ************************ -->
@@ -119,17 +119,43 @@
                       Ensure your username for registration
                     </p>
                     <!-- ************************ SIGN UP FORM ************************ -->
-                    <v-form class="px-7">
+                    <v-form class="px-7" v-model="signUpValid">
                       <v-text-field
-                        v-model="loginForm.username"
                         label="Username"
-                      >
-                      </v-text-field>
+                        prepend-inner-icon="mdi-account"
+                        v-model="signUpForm.username"
+                        :error-messages="signUpUsernameErrors"
+                        @input="$v.signUpForm.username.$touch()"
+                        @blur="$v.signUpForm.username.$touch()"
+                      ></v-text-field>
+
                       <v-text-field
-                        v-model="loginForm.password"
+                        v-model="signUpForm.password"
+                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                        :type="showPassword ? 'text' : 'password'"
+                        name="input-10-1"
                         label="Password"
-                      >
-                      </v-text-field>
+                        counter
+                        prepend-inner-icon="mdi-key"
+                        @click:append="showPassword = !showPassword"
+                        :error-messages="signUpPasswordErrors"
+                        @input="$v.signUpForm.password.$touch()"
+                        @blur="$v.signUpForm.password.$touch()"
+                      ></v-text-field>
+
+                      <v-text-field
+                        v-model="signUpForm.confirmPassword"
+                        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                        :type="showPassword ? 'text' : 'password'"
+                        name="input-10-1"
+                        label="Confirm password"
+                        counter
+                        prepend-inner-icon="mdi-key"
+                        @click:append="showPassword = !showPassword"
+                        :error-messages="signUpConfirmPasswordErrors"
+                        @input="$v.signUpForm.confirmPassword.$touch()"
+                        @blur="$v.signUpForm.confirmPassword.$touch()"
+                      ></v-text-field>
                     </v-form>
                     <!-- ************************ SIGN UP FORM ************************ -->
                   </v-card-text>
@@ -150,7 +176,7 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required } from "vuelidate/lib/validators";
+import { required, sameAs } from "vuelidate/lib/validators";
 
 export default {
   layout: "auth",
@@ -158,16 +184,23 @@ export default {
   mixins: [validationMixin],
 
   validations: {
-    loginForm: {
+    signInForm: {
       username: { required },
       password: { required },
+    },
+    signUpForm: {
+      username: { required },
+      password: { required },
+      confirmPassword: { required, sameAsPassword: sameAs("password") },
     },
   },
 
   data: () => ({
-    loginForm: { username: "", password: "" },
+    signInForm: { username: "", password: "" },
+    signUpForm: { username: "", password: "", confirmPassword: "" },
     step: 1,
-    signValid: false,
+    signInValid: false,
+    signUpValid: false,
     showPassword: false,
   }),
 
@@ -185,18 +218,44 @@ export default {
       return process.env.VUE_APP_TITLE;
     },
 
-    usernameErrors() {
+    signInUsernameErrors() {
       const errors = [];
-      if (!this.$v.loginForm.username.$dirty) return errors;
-      !this.$v.loginForm.username.required &&
-        errors.push("Phải nhập thông tin cho trường này.");
+      if (!this.$v.signInForm.username.$dirty) return errors;
+      !this.$v.signInForm.username.required &&
+        errors.push("This field is required.");
       return errors;
     },
-    passwordErrors() {
+    signInPasswordErrors() {
       const errors = [];
-      if (!this.$v.loginForm.password.$dirty) return errors;
-      !this.$v.loginForm.password.required &&
-        errors.push("Phải nhập thông tin cho trường này.");
+      if (!this.$v.signInForm.password.$dirty) return errors;
+      !this.$v.signInForm.password.required &&
+        errors.push("This field is required.");
+      return errors;
+    },
+
+    signUpUsernameErrors() {
+      const errors = [];
+      if (!this.$v.signUpForm.username.$dirty) return errors;
+      !this.$v.signUpForm.username.required &&
+        errors.push("This field is required.");
+      return errors;
+    },
+    signUpPasswordErrors() {
+      const errors = [];
+      if (!this.$v.signUpForm.password.$dirty) return errors;
+      !this.$v.signUpForm.password.required &&
+        errors.push("This field is required.");
+      return errors;
+    },
+
+    signUpConfirmPasswordErrors() {
+      const errors = [];
+      if (!this.$v.signUpForm.confirmPassword.$dirty) return errors;
+
+      !this.$v.signUpForm.confirmPassword.required &&
+        errors.push("This field is required.");
+      !this.$v.signUpForm.confirmPassword.sameAsPassword &&
+        errors.push("The password entered does not match.");
       return errors;
     },
   },
@@ -205,7 +264,7 @@ export default {
     async signIn() {
       try {
         let response = await this.$auth.loginWith("local", {
-          data: this.loginForm,
+          data: this.signInForm,
         });
         console.log(response);
       } catch (err) {
