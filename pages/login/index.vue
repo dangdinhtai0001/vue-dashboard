@@ -293,7 +293,7 @@ export default {
 
 <style scoped>
 .background:before {
-  background-image: url(~assets/auth_background.jpg);
+  background-image: url(~static/img/auth_background.jpg);
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
