@@ -2,7 +2,7 @@
   <v-container class="fill-height background" fluid>
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="8">
-        <v-card width="50vw" class="mx-auto" elevation="12">
+        <v-card width="60vw" class="mx-auto" elevation="12">
           <!-- ******************************************* SIGN IN ******************************************* -->
           <v-window v-model="step">
             <v-window-item :value="1">
@@ -72,7 +72,7 @@
                   </v-card-text>
 
                   <div class="text-center mt-3 mb-3">
-                    <v-btn rounded outlined dark @click="step++">
+                    <v-btn rounded outlined dark @click="switchForm()">
                       SIGN UP
                     </v-btn>
                   </div>
@@ -94,7 +94,7 @@
                   </v-card-text>
 
                   <div class="text-center mt-3 mb-3">
-                    <v-btn rounded outlined @click="step--"> SIGN IN </v-btn>
+                    <v-btn rounded outlined @click="switchForm()"> SIGN IN </v-btn>
                   </div>
                 </v-col>
 
@@ -225,6 +225,7 @@ export default {
         errors.push("This field is required.");
       return errors;
     },
+
     signInPasswordErrors() {
       const errors = [];
       if (!this.$v.signInForm.password.$dirty) return errors;
@@ -240,6 +241,7 @@ export default {
         errors.push("This field is required.");
       return errors;
     },
+
     signUpPasswordErrors() {
       const errors = [];
       if (!this.$v.signUpForm.password.$dirty) return errors;
@@ -273,7 +275,17 @@ export default {
     },
 
     signUp() {
-      console.log(process.env.VUE_APP_TITLE);
+      this.$toast("I'm a toast!");
+    },
+
+    switchForm() {
+      if (this.step === 1) {
+        this.step = 2;
+      } else {
+        this.step = 1;
+      }
+
+      this.$v.$reset();
     },
   },
 };
