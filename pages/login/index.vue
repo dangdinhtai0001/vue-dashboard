@@ -58,7 +58,14 @@
                   </v-card-text>
 
                   <div class="text-center mt-3 mb-3 tex-uppercase">
-                    <v-btn rounded outlined @click="signIn"> sign in </v-btn>
+                    <v-btn
+                      rounded
+                      outlined
+                      @click="signIn"
+                      :loading="signInLoading"
+                    >
+                      sign in
+                    </v-btn>
                   </div>
                   <p class="text-center mt-3 headline">Forget your password?</p>
                 </v-col>
@@ -71,14 +78,14 @@
                     </h5>
                   </v-card-text>
 
-                  <div>
-                    <TravelAnimation />
-                  </div>
-
                   <div class="text-center mt-3 mb-3">
                     <v-btn rounded outlined dark @click="switchForm()">
                       SIGN UP
                     </v-btn>
+                  </div>
+
+                  <div>
+                    <TravelAnimation />
                   </div>
                 </v-col>
               </v-row>
@@ -97,15 +104,14 @@
                     </h5>
                   </v-card-text>
 
-                                   <div>
-                    <TravelAnimation />
-
-                  </div>
-
                   <div class="text-center mt-3 mb-3">
                     <v-btn rounded outlined @click="switchForm()">
                       SIGN IN
                     </v-btn>
+                  </div>
+
+                  <div>
+                    <TravelAnimation />
                   </div>
                 </v-col>
 
@@ -172,7 +178,14 @@
                   </v-card-text>
 
                   <div class="text-center mt-3 mb-3 text-uppercase">
-                    <v-btn rounded outlined @click="signUp"> Sign up </v-btn>
+                    <v-btn
+                      rounded
+                      outlined
+                      @click="signUp"
+                      :loading="signUpLoading"
+                    >
+                      Sign up
+                    </v-btn>
                   </div>
                 </v-col>
               </v-row>
@@ -217,6 +230,8 @@ export default {
     signInValid: false,
     signUpValid: false,
     showPassword: false,
+    signInLoading: false,
+    signUpLoading: false,
   }),
 
   computed: {
@@ -279,18 +294,31 @@ export default {
 
   methods: {
     async signIn() {
-      try {
-        let response = await this.$auth.loginWith("local", {
-          data: this.signInForm,
-        });
-        console.log(response);
-      } catch (err) {
-        console.error(err);
+      this.signInLoading = true;
+      this.$v.signInForm.$touch();
+
+      if (!this.$v.signInForm.$invalid) {
+        try {
+          let response = await this.$auth.loginWith("customStrategy", {
+            data: {
+              username: this.signInForm.username,
+              password: this.signInForm.password,
+            },
+          });
+          // console.log(response);
+        } catch (err) {
+          console.log(err);
+          this.$toast.error(err.message);
+        }
       }
+
+      this.signInLoading = false;
     },
 
     signUp() {
-      this.$toast.success("I'm a toast!");
+      this.signUpLoading = true;
+      this.$toast.info("Coming soon!");
+      this.signUpLoading = false;
     },
 
     switchForm() {
