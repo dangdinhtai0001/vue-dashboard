@@ -26,6 +26,57 @@
 
         <v-divider color="white" class="mb-2" />
 
+        <!-- -------------------------- User information -------------------------- -->
+
+        <v-list-group color="white" two-line>
+          <template v-slot:activator>
+            <v-list-item-avatar class="align-self-center grey">
+              <img :src="auth.user.avatar" />
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title
+                class="headline font-weight-medium white--text"
+                >{{ auth.user.username }}</v-list-item-title
+              >
+              <v-list-item-subtitle
+                class="caption font-weight-regular white--text"
+              >
+                {{ auth.user.scope[0] }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </template>
+          <template v-slot:appendIcon>
+            <v-icon small class="white--text">mdi-chevron-down</v-icon>
+          </template>
+
+          <v-list-item-group color="white">
+            <v-list-item
+              dense
+              color="white"
+              v-for="(item, i) in profileItems"
+              :key="i"
+              :to="item.to"
+            >
+              <v-list-item-icon>
+                <v-icon
+                  text
+                  small
+                  class="white--text"
+                  v-text="item.icon"
+                ></v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-content>
+                <v-list-item-title
+                  class="white--text body-1 font-weight-regular"
+                  v-text="item.title"
+                ></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list-group>
+
+        <!-- -------------------------- User information -------------------------- -->
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
@@ -81,6 +132,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -91,25 +144,27 @@ export default {
         {
           icon: "mdi-apps",
           title: "Welcome",
-          to: "/",
+          to: "/"
         },
         {
           icon: "mdi-chart-bubble",
           title: "Inspire",
-          to: "/inspire",
-        },
+          to: "/inspire"
+        }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: "Vuetify.js",
+      title: "Vuetify.js"
     };
   },
   computed: {
+    ...mapState(["auth"]),
+
     profile() {
       return {
         avatar: true,
-        title: "vue dashboard",
+        title: "vue dashboard"
       };
     },
 
@@ -118,15 +173,15 @@ export default {
         {
           icon: "mdi-account",
           title: "Profile",
-          to: "/user/profile",
+          to: "/user/profile"
         },
         {
           icon: "mdi-cog",
           title: "Settings",
-          to: "/user/setting",
-        },
+          to: "/user/settings"
+        }
       ];
-    },
-  },
+    }
+  }
 };
 </script>
