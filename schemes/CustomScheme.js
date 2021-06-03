@@ -1,73 +1,76 @@
 export default class CustomScheme {
   constructor(auth, options) {
-    this.$auth = auth
-    this.name = options._name
+    this.$auth = auth;
+    this.name = options._name;
 
-    this.options = Object.assign({}, DEFAULTS, options)
+    this.options = Object.assign({}, DEFAULTS, options);
   }
 
   _setToken(token) {
     if (this.options.globalToken) {
       // Set Authorization token for all axios requests
-      this.$auth.ctx.app.$axios.setHeader(this.options.tokenName, token)
+      this.$auth.ctx.app.$axios.setHeader(this.options.tokenName, token);
     }
   }
 
   _clearToken() {
     if (this.options.globalToken) {
       // Clear Authorization token for all axios requests
-      this.$auth.ctx.app.$axios.setHeader(this.options.tokenName, false)
+      this.$auth.ctx.app.$axios.setHeader(this.options.tokenName, false);
     }
   }
 
   mounted() {
     if (this.options.tokenRequired) {
-      const token = this.$auth.syncToken(this.name)
-      this._setToken(token)
+      const token = this.$auth.syncToken(this.name);
+      this._setToken(token);
     }
 
-    return this.$auth.fetchUserOnce()
+    return this.$auth.fetchUserOnce();
   }
 
   async login(endpoint) {
     if (!this.options.endpoints.login) {
-      return
+      return;
     }
 
     // Ditch any leftover local tokens before attempting to log in
-    await this.$auth.reset()
+    await this.$auth.reset();
 
     const { response, result } = await this.$auth.request(
       endpoint,
       this.options.endpoints.login,
       true
-    )
+    );
 
     if (this.options.tokenRequired) {
       const token = this.options.tokenType
-        ? this.options.tokenType + ' ' + result.accessToken
-        : result.accessToken
+        ? this.options.tokenType + " " + result.accessToken
+        : result.accessToken;
 
-      this.$auth.setToken(this.name, token)
-      this._setToken(token)
+      this.$auth.setToken(this.name, token);
+      this._setToken(token);
     }
 
+    //set refresh token
+    const refreshToken = result.refreshToken;
+    this.$auth.setRefreshToken(this.name, refreshToken);
 
     if (this.options.autoFetchUser) {
-      await this.fetchUser()
+      await this.fetchUser();
     }
 
-    return response
+    return response;
   }
 
   async setUserToken(tokenValue) {
     const token = this.options.tokenType
-      ? this.options.tokenType + ' ' + tokenValue
-      : tokenValue
-    this.$auth.setToken(this.name, token)
-    this._setToken(token)
+      ? this.options.tokenType + " " + tokenValue
+      : tokenValue;
+    this.$auth.setToken(this.name, token);
+    this._setToken(token);
 
-    return this.fetchUser()
+    return this.fetchUser();
   }
 
   // ------------------------------------------------------------------------------
@@ -77,13 +80,13 @@ export default class CustomScheme {
   async fetchUser(endpoint) {
     // Token is required but not available
     if (this.options.tokenRequired && !this.$auth.getToken(this.name)) {
-      return
+      return;
     }
 
     // User endpoint is disabled.
     if (!this.options.endpoints.user) {
-      this.$auth.setUser({})
-      return
+      this.$auth.setUser({});
+      return;
     }
 
     // Try to fetch user and then set
@@ -93,52 +96,42 @@ export default class CustomScheme {
       this.options.endpoints.user
     );
 
-    // Transform the user object
-    const customUser = {
-      ...user,
-      scope: user.role
-    };
-
-    delete customUser.role;
-
-
-    this.$auth.setUser(customUser)
+    this.$auth.setUser(user);
   }
 
   // ------------------------------------------------------------------------------
   // ------------------------------------------------------------------------------
   // ------------------------------------------------------------------------------
-
 
   async logout(endpoint) {
     // Only connect to logout endpoint if it's configured
     if (this.options.endpoints.logout) {
       await this.$auth
         .requestWith(this.name, endpoint, this.options.endpoints.logout)
-        .catch(() => { })
+        .catch(() => {});
     }
 
     // But reset regardless
-    return this.$auth.reset()
+    return this.$auth.reset();
   }
 
   async reset() {
     if (this.options.tokenRequired) {
-      this._clearToken()
+      this._clearToken();
     }
 
-    this.$auth.setUser(false)
-    this.$auth.setToken(this.name, false)
-    this.$auth.setRefreshToken(this.name, false)
+    this.$auth.setUser(false);
+    this.$auth.setToken(this.name, false);
+    this.$auth.setRefreshToken(this.name, false);
 
-    return Promise.resolve()
+    return Promise.resolve();
   }
 }
 
 const DEFAULTS = {
   tokenRequired: true,
-  tokenType: 'Bearer',
+  tokenType: "Bearer",
   globalToken: true,
-  tokenName: 'Authorization',
+  tokenName: "Authorization",
   autoFetchUser: true
-}
+};
