@@ -5,7 +5,3 @@
     </v-main>
   </v-app>
 </template>
-
-<style scoped>
-
-</style>

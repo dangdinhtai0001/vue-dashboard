@@ -203,7 +203,7 @@ import { validationMixin } from "vuelidate";
 import { required, sameAs } from "vuelidate/lib/validators";
 
 export default {
-  layout: "auth",
+  layout: "empty",
 
   mixins: [validationMixin],
 
