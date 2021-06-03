@@ -11,8 +11,8 @@ export default {
     // console.log(this.$auth.$storage._state);
     // console.log(this.$auth.$storage);
 
-    console.log(this.$auth.hasScope('user'));
-    console.log(this.$auth.scope);
+    // console.log(this.$auth.hasScope('user'));
+    // console.log(this.$auth.scope);
   },
 };
 </script>
