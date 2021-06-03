@@ -146,7 +146,7 @@
     <!-- ================================== app-bar ================================== -->
     <v-app-bar :clipped-left="clipped" fixed app>
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
+      <v-btn icon @click.stop="updateMiniVariant">
         <!-- <v-icon>mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon> -->
         <v-icon v-if="miniVariant">mdi-menu</v-icon>
         <v-icon v-if="!miniVariant">mdi-menu-open</v-icon>
@@ -221,27 +221,31 @@ export default {
         {
           icon: "mdi-apps",
           title: "Welcome",
-          to: "/"
+          to: "/",
         },
         {
           icon: "mdi-chart-bubble",
           title: "Inspire",
-          to: "/inspire"
-        }
+          to: "/inspire",
+        },
       ],
-      miniVariant: false,
+      // miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: "Vuetify.js"
+      title: "Vuetify.js",
     };
   },
   computed: {
-    ...mapState(["auth"]),
+    ...mapState(["auth", "application"]),
+
+    miniVariant() {
+      return this.application.drawer.miniVariant;
+    },
 
     profile() {
       return {
         avatar: true,
-        title: "vue dashboard"
+        title: "vue dashboard",
       };
     },
 
@@ -250,13 +254,13 @@ export default {
         {
           icon: "mdi-account",
           title: "Profile",
-          to: "/user/profile"
+          to: "/user/profile",
         },
         {
           icon: "mdi-cog",
           title: "Settings",
-          to: "/user/settings"
-        }
+          to: "/user/settings",
+        },
       ];
     },
 
@@ -277,7 +281,7 @@ export default {
       breadcrumbs.push({
         text: "Dasboard",
         href: "/",
-        disabled: false
+        disabled: false,
       });
 
       if (arr.length <= 2) {
@@ -285,7 +289,7 @@ export default {
         breadcrumbs.push({
           text: arr[0].charAt(0).toUpperCase() + arr[0].slice(1),
           href: href,
-          disabled: false
+          disabled: false,
         });
       } else {
         for (let i = 1; i < arr.length; i++) {
@@ -296,7 +300,7 @@ export default {
           breadcrumbs.push({
             text: arr[i].charAt(0).toUpperCase() + arr[i].slice(1),
             href: href,
-            disabled: false
+            disabled: false,
           });
         }
       }
@@ -304,7 +308,13 @@ export default {
       breadcrumbs[breadcrumbs.length - 1].disabled = true;
 
       return breadcrumbs;
-    }
-  }
+    },
+  },
+
+  methods: {
+    updateMiniVariant() {
+      this.$store.commit("application/SET_DRAWER_MINI_VARIANT", !this.miniVariant);
+    },
+  },
 };
 </script>
