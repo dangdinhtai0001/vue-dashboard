@@ -158,12 +158,20 @@ this.$auth.$storage._state
 
 Thông tin về user
 ```javascript
+// Access using $auth
 this.$auth.user
+
+// Access using vuex
+this.$store.state.auth.user
 ```
 
 Trạng thái đăng nhập
 ```javascript
+// Access using $auth
 this.$auth.loggedIn
+
+// Access using vuex
+this.$store.state.auth.loggedIn
 ```
 
 Kiểm tra xem current user có quyền xác định nào đó (Ví dụ như `user` hay không)
