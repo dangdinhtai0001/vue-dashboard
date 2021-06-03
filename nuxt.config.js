@@ -36,9 +36,7 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     "@nuxtjs/vuetify",
     // https://github.com/nuxt-community/dotenv-module
-    "@nuxtjs/dotenv",
-    // https://github.com/nuxt-community/router-module
-    "@nuxtjs/router"
+    "@nuxtjs/dotenv"
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -131,15 +129,6 @@ export default {
       }
     }
   },
-
-  // https://github.com/nuxt-community/router-module
-  routerModule: {
-    /* module options */
-    path: "srcDir/router",
-    fileName: "router.js",
-    keepDefaultRouter: false
-  },
-
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {}
 };

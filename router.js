@@ -10,6 +10,10 @@ export function createRouter() {
       {
         path: '/dashboard',
         redirect: '/'
+      },
+      {
+        path: "/user",
+        redirect: "/user/profile"
       }
     ]
   })

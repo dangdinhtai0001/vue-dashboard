@@ -4,7 +4,7 @@
 export default {
   layout: "default",
   middleware({ store, redirect }) {
-    return redirect("/dashboard");
+    return redirect("/user/profile");
   },
 };
 </script>
