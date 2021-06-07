@@ -20,13 +20,16 @@ export default {
   loading: { color: "#fff" },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    'ag-grid-community/dist/styles/ag-grid.css',
+    'ag-grid-community/dist/styles/ag-theme-balham.css',
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: "~/plugins/vuelidate.js", mode: "client" },
     { src: "~/plugins/vue-toastification.js", mode: "client" },
-    { src: '~plugins/persistedstate.js' }
+    { src: '~plugins/persistedstate.js' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -45,7 +48,9 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     // https://auth.nuxtjs.org/guide/setup/
-    "@nuxtjs/auth"
+    "@nuxtjs/auth",
+    // https://tailwindcss.nuxtjs.org/setup
+    '@nuxtjs/tailwindcss'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -98,6 +103,14 @@ export default {
     middleware: ["auth"]
   },
 
+  // https://tailwindcss.nuxtjs.org/options
+  tailwindcss: {
+    cssPath: '~/assets/css/tailwind.css',
+    configPath: 'tailwind.config.js',
+    exposeConfig: false,
+    config: {}
+  },
+
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     treeShaking: true,
@@ -133,7 +146,6 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     extend(config, ctx) {
-
     }
   }
 };

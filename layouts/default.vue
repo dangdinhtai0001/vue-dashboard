@@ -17,7 +17,13 @@
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title
-              class="text-uppercase font-weight-regular headline text-center white--text"
+              class="
+                text-uppercase
+                font-weight-regular
+                headline
+                text-center
+                white--text
+              "
               v-text="profile.title"
             />
           </v-list-item-content>
@@ -161,17 +167,62 @@
 
       <!-- <v-app-bar-title > -->
       <div>
-        <v-scroll-x-transition>
+        <!-- <v-scroll-x-transition> -->
+        <v-expand-transition>
           <v-breadcrumbs
             :items="getBreadcrumbsItems"
             divider="/"
             small
           ></v-breadcrumbs>
-        </v-scroll-x-transition>
+        </v-expand-transition>
+        <!-- </v-scroll-x-transition> -->
       </div>
       <!-- </v-app-bar-title> -->
 
       <v-spacer />
+
+      <!-- ---------------------------- menu ---------------------------- -->
+      <v-menu
+        bottom
+        left
+        min-width="200px"
+        rounded
+        offset-y
+        dense
+        transition="slide-x-reverse-transition"
+        content-class="user-menu"
+      >
+        <template v-slot:activator="{ on }">
+          <v-btn icon v-on="on">
+            <v-avatar size="39">
+              <img :src="auth.user.avatar" />
+            </v-avatar>
+          </v-btn>
+        </template>
+        <v-card>
+          <v-list dense>
+            <div v-for="(item, index) in getUserItems" :key="index">
+              <v-list-item v-if="!item.divider" :to="item.to" link>
+                <v-list-item-title class="caption font-weight-regular">
+                  {{ item.title }}
+                </v-list-item-title>
+              </v-list-item>
+              <v-divider v-if="item.divider"></v-divider>
+            </div>
+            <v-list-item link>
+              <v-list-item-title
+                class="caption font-weight-regular"
+                v-on:click="logout"
+              >
+                Log Out
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-card>
+      </v-menu>
+
+      <!-- ---------------------------- menu ---------------------------- -->
+
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
@@ -200,9 +251,9 @@
     <!-- ================================== right-drawer ================================== -->
 
     <!-- ================================== footer ================================== -->
-    <v-footer :absolute="!fixed" app>
+    <!-- <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
+    </v-footer> -->
     <!-- ================================== footer ================================== -->
   </v-app>
 </template>
@@ -217,22 +268,9 @@ export default {
       clipped: false,
       drawer: true,
       fixed: false,
-      items: [
-        {
-          icon: "mdi-apps",
-          title: "Welcome",
-          to: "/",
-        },
-        {
-          icon: "mdi-chart-bubble",
-          title: "Inspire",
-          to: "/inspire",
-        },
-      ],
       // miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: "Vuetify.js",
     };
   },
   computed: {
@@ -309,12 +347,55 @@ export default {
 
       return breadcrumbs;
     },
+
+    getUserItems() {
+      return [
+        {
+          title: "Profile",
+          to: "/user/profile",
+        },
+        {
+          title: "Setting",
+          to: "/user/setting",
+        },
+        {
+          divider: true,
+        },
+      ];
+    },
   },
 
   methods: {
     updateMiniVariant() {
-      this.$store.commit("application/SET_DRAWER_MINI_VARIANT", !this.miniVariant);
+      this.$store.commit(
+        "application/SET_DRAWER_MINI_VARIANT",
+        !this.miniVariant
+      );
+    },
+
+    async logout() {
+      await this.$auth.logout();
     },
   },
 };
 </script>
+
+<style scoped>
+.user-menu {
+  margin-top: 20px;
+  contain: initial;
+  overflow: visible;
+}
+.user-menu::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 10px;
+  transform: translateY(-100%);
+  width: 10px;
+  height: 13px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 13px solid #fff;
+}
+</style>

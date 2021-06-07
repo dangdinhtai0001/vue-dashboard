@@ -1,0 +1,149 @@
+{
+    "source": "mockoon:1.14.1",
+    "data": [
+        {
+            "type": "environment",
+            "item": {
+                "uuid": "",
+                "lastMigration": 15,
+                "name": "Vue Dashboard",
+                "endpointPrefix": "api/v0",
+                "latency": 0,
+                "port": 3001,
+                "routes": [
+                    {
+                        "uuid": "",
+                        "documentation": "Api login",
+                        "method": "post",
+                        "endpoint": "auth/login",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"accessToken\": \"1234564/8754231.1213\",\n  \"refreshToken\": \"545994830023404\"\n}",
+                                "latency": 50,
+                                "statusCode": 200,
+                                "label": "Success",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "api refresh token",
+                        "method": "post",
+                        "endpoint": "auth/refresh",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjIiLCJwaWN0dXJlIjoiaHR0cHM6Ly9naXRodWIuY29tL251eHQucG5nIiwibmFtZSI6IlVzZXIgMiIsInNjb3BlIjpbInRlc3QiLCJ1c2VyIl0sImlhdCI6MTYyMjQ3Njc4NywiZXhwIjoxNjIyNDc2ODAyfQ.gEZGE7GQVIMx4D3GnhTWEwPmSaUxykviHyBalVMppzw\",\n  \"user\": {\n    \n  }\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "fetch curent user profile",
+                        "method": "get",
+                        "endpoint": "auth/profile",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\r\n   \"id\":\"605c0e71d036c121340d8701\",\r\n   \"username\":\"admin\",\r\n   \"scope\":[\r\n      \"administrator\"\r\n   ],\r\n   \"avatar\":\"https://i.pinimg.com/originals/85/14/35/85143554333833f0d5ee879d1390077f.jpg\"\r\n}",
+                                "latency": 50,
+                                "statusCode": 200,
+                                "label": "Success",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "",
+                        "method": "post",
+                        "endpoint": "auth/logout",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    }
+                ],
+                "proxyMode": false,
+                "proxyHost": "",
+                "proxyRemovePrefix": false,
+                "https": false,
+                "cors": true,
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    },
+                    {
+                        "key": "Access-Control-Allow-Origin",
+                        "value": "*"
+                    },
+                    {
+                        "key": "Access-Control-Allow-Methods",
+                        "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+                    },
+                    {
+                        "key": "Access-Control-Allow-Headers",
+                        "value": "Content-Type, Origin, Accept,Authorization,Content-Length, X-Requested-With"
+                    }
+                ],
+                "proxyReqHeaders": [
+                    {
+                        "key": "",
+                        "value": ""
+                    }
+                ],
+                "proxyResHeaders": [
+                    {
+                        "key": "",
+                        "value": ""
+                    }
+                ]
+            }
+        }
+    ]
+}

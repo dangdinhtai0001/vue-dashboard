@@ -2,6 +2,7 @@
 https://stackoverflow.com/questions/67631879/nuxtjs-vuetify-throwing-lots-of-using-for-division-is-deprecated-and-will-be
 https://stackoverflow.com/questions/53966872/ssr-vuex-store-in-nuxt
 https://github.com/nuxt/nuxt.js/issues/972#issuecomment-372223633
+https://github.com/dangdinhtai0001/vue-dashboard.git
 
 .display-4
 .display-3
