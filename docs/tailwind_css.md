@@ -39,7 +39,7 @@ yarn add --dev @nuxtjs/tailwindcss postcss@latest
 
  // Global CSS: https://go.nuxtjs.dev/config-css
  css: [
-   '@/assets/app.css'
+   '@/assets/tailwind.css'
  ],
 
 ```

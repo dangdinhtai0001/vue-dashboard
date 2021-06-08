@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app dark >
     <!-- ================================== navigation-drawer ================================== -->
     <v-navigation-drawer
       v-model="drawer"
@@ -190,7 +190,6 @@
         offset-y
         dense
         transition="slide-x-reverse-transition"
-        content-class="user-menu"
       >
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on">
@@ -199,7 +198,7 @@
             </v-avatar>
           </v-btn>
         </template>
-        <v-card>
+        <v-card class="pa-0 ma-0">
           <v-list dense>
             <div v-for="(item, index) in getUserItems" :key="index">
               <v-list-item v-if="!item.divider" :to="item.to" link>
@@ -231,8 +230,8 @@
 
     <!-- ================================== content ================================== -->
     <v-main>
-      <v-container>
-        <nuxt />
+      <v-container fluid class="pa-0 ma-0">
+        <nuxt  />
       </v-container>
     </v-main>
     <!-- ================================== content ================================== -->
