@@ -3,17 +3,41 @@
     <v-row align="center" justify="center" class="pa-5 mx-auto">
       <!-- -------------- main column -------------- -->
       <v-col cols="7">
-        <v-card outlined height="60vh" class="ml-7 mx-auto"> </v-card>
+        <v-card outlined height="60vh" class="px-3 py-1 mx-auto">
+          <v-window v-model="window">
+            <!-- ================================== -->
+            <v-window-item :value="1">
+              <v-card-title >
+                <h1 class="text-3xl">Account information</h1>
+                <div
+                  class="mx-auto w-4/5 pt-3 border-b-2 border-500 opacity-25"
+                ></div>
+              </v-card-title>
+              <v-btn outlined small dark @click="switchWindow()">
+                Next
+              </v-btn>
+            </v-window-item>
+            <!-- ================================== -->
+
+            <!-- ================================== -->
+            <v-window-item :value="2">
+              <v-btn rounded outlined dark @click="switchWindow()">
+                Previous
+              </v-btn>
+            </v-window-item>
+            <!-- ================================== -->
+          </v-window>
+        </v-card>
       </v-col>
       <!-- -------------- main column -------------- -->
       <v-col cols="4">
-        <div>
+        <v-scroll-x-reverse-transition mode="out-in">
           <v-img
             :src="auth.user.avatar"
             height="80vh"
             class="rounded-3xl avatar"
           ></v-img>
-        </div>
+        </v-scroll-x-reverse-transition>
       </v-col>
     </v-row>
   </v-container>
@@ -24,18 +48,34 @@ export default {
   name: "UserProfile",
 
   data: () => ({
+    window: 1
   }),
 
   computed: {
     ...mapState(["auth"]),
     backgroundStyles() {
-      return { "--background-image": "url(" + this.auth.user.avatar + ")"};
+      return { "--background-image": "url(" + this.auth.user.avatar + ")" };
+    }
+  },
+
+  methods: {
+    switchWindow() {
+      if (this.window === 1) {
+        this.window = 2;
+      } else {
+        this.window = 1;
+      }
     }
   }
 };
 </script>
 
 <style scoped>
+.avatar-left {
+  position: relative;
+  right: -30px;
+}
+
 .avatar {
   position: relative;
   left: -30px;
