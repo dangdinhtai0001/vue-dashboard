@@ -21,8 +21,6 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'ag-grid-community/dist/styles/ag-grid.css',
-    'ag-grid-community/dist/styles/ag-theme-balham.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

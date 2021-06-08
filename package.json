@@ -18,7 +18,6 @@
     "nuxt": "^2.15.3",
     "sass": "^1.34.1",
     "sass-loader": "10",
-    "vue-property-decorator": "^9.1.2",
     "vue-toastification": "^1.7.11",
     "vuelidate": "^0.7.6",
     "vuex-persistedstate": "^4.0.0-beta.3"
