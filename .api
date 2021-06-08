@@ -67,7 +67,7 @@
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\r\n   \"id\":\"605c0e71d036c121340d8701\",\r\n   \"username\":\"admin\",\r\n   \"scope\":[\r\n      \"administrator\"\r\n   ],\r\n   \"avatar\":\"https://i.pinimg.com/originals/85/14/35/85143554333833f0d5ee879d1390077f.jpg\"\r\n}",
+                                "body": "{\r\n   \"id\":\"605c0e71d036c121340d8701\",\r\n   \"username\":\"admin\",\r\n   \"scope\":[\r\n      \"administrator\"\r\n   ],\r\n   \"avatar\":\"https://source.unsplash.com/MP0IUfwrn0A\"\r\n}",
                                 "latency": 50,
                                 "statusCode": 200,
                                 "label": "Success",
