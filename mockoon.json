@@ -63,11 +63,11 @@
                         "uuid": "",
                         "documentation": "fetch curent user profile",
                         "method": "get",
-                        "endpoint": "auth/profile",
+                        "endpoint": "auth/user",
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\r\n   \"id\":\"605c0e71d036c121340d8701\",\r\n   \"username\":\"admin\",\r\n   \"scope\":[\r\n      \"administrator\"\r\n   ],\r\n   \"avatar\":\"https://source.unsplash.com/MP0IUfwrn0A\"\r\n}",
+                                "body": "{\r\n   \"id\":\"605c0e71d036c121340d8701\",\r\n   \"username\":\"admin\",\r\n   \"scope\":[\r\n      \"administrator\", \"leader\"\r\n   ],\r\n   \"avatar\":\"https://source.unsplash.com/MP0IUfwrn0A\"\r\n}",
                                 "latency": 50,
                                 "statusCode": 200,
                                 "label": "Success",
@@ -85,13 +85,37 @@
                     },
                     {
                         "uuid": "",
-                        "documentation": "",
+                        "documentation": "logout ",
                         "method": "post",
                         "endpoint": "auth/logout",
                         "responses": [
                             {
                                 "uuid": "",
                                 "body": "{}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    },
+                    {
+                        "uuid": "",
+                        "documentation": "user information queryParam : id",
+                        "method": "get",
+                        "endpoint": "user",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\r\n  \"userId\":\"{{ queryParam 'id' }}\",\r\n  \"name\":\"leanne Graham\",\r\n  \"email\":\"Sincere@april.biz\",\r\n  \"dateOfBirth\": \"23/01/1998\",\r\n  \"phone\":\"1-770-736-8031 x56442\",\r\n  \"social\": {\r\n    \"facebook\": \"https://www.facebook.com/\",\r\n    \"twitter\": \"https://twitter.com/\",\r\n    \"github\": \"https://github.com/\",\r\n    \"instagram\":\"http://instagram.com/\",\r\n    \"google\": \"https://www.google.com.vn/\",\r\n    \"pinterest\": \"https://www.pinterest.com/\"\r\n  }\r\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
