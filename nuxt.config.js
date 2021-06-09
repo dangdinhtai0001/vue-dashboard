@@ -20,7 +20,7 @@ export default {
   loading: { color: "#fff" },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [  
+  css: [
     '@/assets/tailwind.css'
   ],
 
@@ -91,7 +91,7 @@ export default {
           login: { url: "/auth/login", method: "post" },
           refresh: { url: "/auth/refresh", method: "post" },
           logout: { url: "/auth/logout", method: "post" },
-          user: { url: "/auth/profile", method: "get" }
+          user: { url: "/auth/user", method: "get" }
         }
       }
     }
