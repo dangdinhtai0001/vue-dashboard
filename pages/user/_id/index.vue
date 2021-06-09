@@ -4,14 +4,35 @@
       <!-- -------------- main column -------------- -->
       <v-col cols="7">
         <!-- ================================== -->
-        <v-card outlined height="60vh" class="px-3 py-1 mx-auto">
-          <v-card-title>
-            <h1 class="text-3xl">Account information</h1>
-            <div
-              class="mx-auto w-4/5 pt-3 border-b-2 border-500 opacity-25"
-            ></div>
+        <v-card
+          outlined
+          height="60vh"
+          class="px-3 pl-7 py-1 mx-auto opacity-90"
+        >
+          <v-card-title class="mt-7">
+            <p class="text-4xl font-normal text-capitalize">
+              {{ profile.name }}
+            </p>
+            <div class="w-4/5 pt-3 border-b-2 border-500 opacity-25"></div>
           </v-card-title>
-          <v-btn outlined small dark @click="switchWindow()"> Next </v-btn>
+
+          <v-card-text> {{ profile }} </v-card-text>
+
+          <v-card-actions class="pl-0">
+            <v-spacer></v-spacer>
+            <v-btn icon fab small> <v-icon large>mdi-facebook</v-icon> </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn icon fab small> <v-icon large>mdi-twitter</v-icon> </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn icon fab small> <v-icon large>mdi-github</v-icon> </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn icon fab small> <v-icon large>mdi-instagram</v-icon> </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn icon fab small> <v-icon large>mdi-gmail</v-icon> </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn icon fab small> <v-icon large>mdi-pinterest</v-icon> </v-btn>
+            <v-spacer></v-spacer>
+          </v-card-actions>
         </v-card>
         <!-- ================================== -->
       </v-col>
@@ -20,7 +41,7 @@
         <v-img
           :src="auth.user.avatar"
           height="80vh"
-          class="rounded-3xl avatar"
+          class="rounded-3xl avatar shadow-md border-4"
         ></v-img>
       </v-col>
     </v-row>
@@ -32,23 +53,26 @@ export default {
   name: "UserProfile",
 
   data: () => ({
-    window: 1,
+    profile: { name: "" },
   }),
 
   computed: {
     ...mapState(["auth"]),
     backgroundStyles() {
-      return { "--background-image": "url(" + this.auth.user.avatar + ")" };
+      return { "--background-image": "url(" + this.profile.avatar + ")" };
     },
   },
 
+  async beforeMount() {
+    await this.fetchUserData();
+  },
+
   methods: {
-    switchWindow() {
-      if (this.window === 1) {
-        this.window = 2;
-      } else {
-        this.window = 1;
-      }
+    async fetchUserData() {
+      let url = "/user?id=" + this.auth.user.id;
+      const userData = await this.$axios.$get(url);
+
+      this.profile = { ...userData, ...this.auth.user };
     },
   },
 };
@@ -62,7 +86,7 @@ export default {
 
 .avatar {
   position: relative;
-  left: -35px;
+  left: -40px;
 }
 .background {
   /* background-image: url("https://source.unsplash.com/random/1600x900"); */
