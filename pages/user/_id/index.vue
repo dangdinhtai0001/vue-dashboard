@@ -1,24 +1,57 @@
 <template>
   <v-container fluid class="background" :style="backgroundStyles">
     <v-row align="center" justify="center" class="pa-5 mx-auto">
+      <!-- <v-col cols="3"></v-col> -->
       <!-- -------------- main column -------------- -->
-      <v-col cols="7">
+      <v-col cols="5">
         <!-- ================================== -->
         <v-card
           outlined
           height="60vh"
+          width="50vw"
           class="px-3 pl-7 py-1 mx-auto opacity-90"
         >
           <v-card-title class="mt-7">
-            <p class="text-4xl font-normal text-capitalize">
+            <p class="text-5xl font-bold text-capitalize">
               {{ profile.name }}
             </p>
             <div class="w-4/5 pt-3 border-b-2 border-500 opacity-25"></div>
           </v-card-title>
 
-          <v-card-text> {{ profile }} </v-card-text>
+          <v-card-text class="mt-7">
+            <p class="my-7">
+              <v-icon large class="mr-3">mdi-account</v-icon>
+              <span class="mt-2 text-xl font-light">
+                {{ profile.username }}
+              </span>
+            </p>
+            <p class="my-7">
+              <v-icon large class="mr-3">mdi-account-key</v-icon>
+              <span
+                class="mt-2 text-xl font-light"
+                v-for="(scope, i) in profile.scope"
+                :key="i"
+              >
+                {{ scope }},
+              </span>
+            </p>
+            <p class="my-7">
+              <v-icon large class="mr-3">mdi-cake-layered</v-icon>
+              <span class="mt-2 text-xl font-light">
+                {{ profile.dateOfBirth }}
+              </span>
+            </p>
+            <p class="my-7">
+              <v-icon large class="mr-3">mdi-cellphone</v-icon>
+              <span class="mt-2 text-xl font-light">
+                {{ profile.phone }}
+              </span>
+            </p>
+          </v-card-text>
 
-          <v-card-actions class="pl-0">
+          <v-scpacer></v-scpacer>
+
+          <v-card-actions class="pl-0 mt-7">
             <v-spacer></v-spacer>
             <v-btn icon fab small> <v-icon large>mdi-facebook</v-icon> </v-btn>
             <v-spacer></v-spacer>
