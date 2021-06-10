@@ -11,42 +11,39 @@
           width="50vw"
           class="px-3 pl-7 py-1 mx-auto opacity-90"
         >
-          <v-card-title class="mt-7">
-            <p class="text-5xl font-bold text-capitalize">
+          <v-card-title class="mt-3">
+            <p class="text-3xl font-bold text-capitalize">
               {{ profile.name }}
             </p>
-            <div class="w-4/5 pt-3 border-b-2 border-500 opacity-25"></div>
+            <div class="w-4/5 pt-1 border-b-2 border-500 opacity-25"></div>
           </v-card-title>
 
-          <v-card-text class="mt-7">
-            <p class="my-7">
-              <v-icon large class="mr-3">mdi-account</v-icon>
-              <span class="mt-2 text-xl font-light">
-                {{ profile.username }}
-              </span>
-            </p>
-            <p class="my-7">
-              <v-icon large class="mr-3">mdi-account-key</v-icon>
-              <span
-                class="mt-2 text-xl font-light"
-                v-for="(scope, i) in profile.scope"
-                :key="i"
-              >
-                {{ scope }},
-              </span>
-            </p>
-            <p class="my-7">
-              <v-icon large class="mr-3">mdi-cake-layered</v-icon>
-              <span class="mt-2 text-xl font-light">
-                {{ profile.dateOfBirth }}
-              </span>
-            </p>
-            <p class="my-7">
-              <v-icon large class="mr-3">mdi-cellphone</v-icon>
-              <span class="mt-2 text-xl font-light">
-                {{ profile.phone }}
-              </span>
-            </p>
+          <v-card-text class="mt-3">
+            <icon-with-text
+              pIcon="mdi-account"
+              :pText="profile.username"
+              pTextClass="text-lg font-light"
+            ></icon-with-text>
+
+            <icon-with-text
+              pIcon="mdi-account-key"
+              :pText="computedScopeString"
+              pTextClass="text-lg font-light"
+            ></icon-with-text>
+
+            <icon-with-text
+              pIcon="mdi-cake-layered"
+              :pText="profile.dateOfBirth"
+              pTextClass="text-lg font-light"
+            ></icon-with-text>
+
+            <icon-with-text
+              pIcon="mdi-cellphone"
+              :pText="profile.phone"
+              pTextClass="text-lg font-light"
+            ></icon-with-text>
+
+            
           </v-card-text>
 
           <v-scpacer></v-scpacer>
@@ -82,11 +79,16 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import IconWithText from "~/components/text/IconWithText.vue";
 export default {
   name: "UserProfile",
 
+  components: {
+    IconWithText: () => import("~/components/text/IconWithText.vue")
+  },
+
   data: () => ({
-    profile: { name: "" },
+    profile: { name: "" }
   }),
 
   computed: {
@@ -94,6 +96,11 @@ export default {
     backgroundStyles() {
       return { "--background-image": "url(" + this.profile.avatar + ")" };
     },
+
+    computedScopeString(){
+      let array = this.profile.scopes;
+      return array.join(',');
+    }
   },
 
   async beforeMount() {
@@ -106,8 +113,8 @@ export default {
       const userData = await this.$axios.$get(url);
 
       this.profile = { ...userData, ...this.auth.user };
-    },
-  },
+    }
+  }
 };
 </script>
 
