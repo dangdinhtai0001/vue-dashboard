@@ -7,7 +7,7 @@
         <!-- ================================== -->
         <v-card
           outlined
-          height="60vh"
+          height="50vh"
           width="50vw"
           class="px-3 pl-7 py-1 mx-auto opacity-90"
         >
@@ -17,52 +17,6 @@
             </p>
             <div class="w-4/5 pt-1 border-b-2 border-500 opacity-25"></div>
           </v-card-title>
-
-          <v-card-text class="mt-3">
-            <icon-with-text
-              pIcon="mdi-account"
-              :pText="profile.username"
-              pTextClass="text-lg font-light"
-            ></icon-with-text>
-
-            <icon-with-text
-              pIcon="mdi-account-key"
-              :pText="computedScopeString"
-              pTextClass="text-lg font-light"
-            ></icon-with-text>
-
-            <icon-with-text
-              pIcon="mdi-cake-layered"
-              :pText="profile.dateOfBirth"
-              pTextClass="text-lg font-light"
-            ></icon-with-text>
-
-            <icon-with-text
-              pIcon="mdi-cellphone"
-              :pText="profile.phone"
-              pTextClass="text-lg font-light"
-            ></icon-with-text>
-
-            
-          </v-card-text>
-
-          <v-scpacer></v-scpacer>
-
-          <v-card-actions class="pl-0 mt-7">
-            <v-spacer></v-spacer>
-            <v-btn icon fab small> <v-icon large>mdi-facebook</v-icon> </v-btn>
-            <v-spacer></v-spacer>
-            <v-btn icon fab small> <v-icon large>mdi-twitter</v-icon> </v-btn>
-            <v-spacer></v-spacer>
-            <v-btn icon fab small> <v-icon large>mdi-github</v-icon> </v-btn>
-            <v-spacer></v-spacer>
-            <v-btn icon fab small> <v-icon large>mdi-instagram</v-icon> </v-btn>
-            <v-spacer></v-spacer>
-            <v-btn icon fab small> <v-icon large>mdi-gmail</v-icon> </v-btn>
-            <v-spacer></v-spacer>
-            <v-btn icon fab small> <v-icon large>mdi-pinterest</v-icon> </v-btn>
-            <v-spacer></v-spacer>
-          </v-card-actions>
         </v-card>
         <!-- ================================== -->
       </v-col>
@@ -70,7 +24,7 @@
       <v-col cols="4">
         <v-img
           :src="auth.user.avatar"
-          height="80vh"
+          height="70vh"
           class="rounded-3xl avatar shadow-md border-4"
         ></v-img>
       </v-col>
@@ -84,11 +38,11 @@ export default {
   name: "UserProfile",
 
   components: {
-    IconWithText: () => import("~/components/text/IconWithText.vue")
+    IconWithText: () => import("~/components/text/IconWithText.vue"),
   },
 
   data: () => ({
-    profile: { name: "" }
+    profile: { name: "" },
   }),
 
   computed: {
@@ -97,10 +51,9 @@ export default {
       return { "--background-image": "url(" + this.profile.avatar + ")" };
     },
 
-    computedScopeString(){
-      let array = this.profile.scopes;
-      return array.join(',');
-    }
+    computedScopeString() {
+      return this.profile.scopes;
+    },
   },
 
   async beforeMount() {
@@ -113,8 +66,8 @@ export default {
       const userData = await this.$axios.$get(url);
 
       this.profile = { ...userData, ...this.auth.user };
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -134,7 +87,7 @@ export default {
   background-image: var(--background-image);
 
   /* Full height */
-  height: 95vh;
+  height: 94vh;
   width: 100vw;
 
   /* Center and scale the image nicely */
