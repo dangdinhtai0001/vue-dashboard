@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="background" :style="backgroundStyles">
+  <v-container fluid class="background fill-height" :style="backgroundStyles">
     <v-row align="center" justify="center" class="pa-5 mx-auto">
       <!-- <v-col cols="3"></v-col> -->
       <!-- -------------- main column -------------- -->
@@ -87,8 +87,8 @@ export default {
   background-image: var(--background-image);
 
   /* Full height */
-  height: 94vh;
-  width: 100vw;
+  /* height: 94vh;
+  width: 100vw; */
 
   /* Center and scale the image nicely */
   background-position: center;

@@ -230,7 +230,7 @@
 
     <!-- ================================== content ================================== -->
     <v-main>
-      <v-container fluid class="pa-0 ma-0">
+      <v-container fluid class="pa-0 ma-0 fill-height">
         <nuxt  />
       </v-container>
     </v-main>
