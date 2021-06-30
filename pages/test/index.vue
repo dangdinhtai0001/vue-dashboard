@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HotTable :settings="settings" :data="data" ></HotTable>
+    <HotTable :settings="settings" :data="data"></HotTable>
   </div>
 </template>
 
@@ -23,7 +23,15 @@ export default {
       settings: {
         colHeaders: true,
         rowHeaders: true,
-        licenseKey: 'non-commercial-and-evaluation'
+        width: "100%",
+        height: 100,
+        dropdownMenu: true,
+        manualColumnResize: true,
+        manualRowResize: true,
+        manualColumnMove: true,
+        manualRowMove: true,
+        columnSorting: true,
+        licenseKey: "non-commercial-and-evaluation"
       }
     };
   },
